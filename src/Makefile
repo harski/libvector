@@ -30,12 +30,12 @@ lib$(LIBNAME).a: $(STATIC_OBJDIR) $(STATIC_OBJS)
 	$(AR) $(ARFLAGS) lib$(LIBNAME).a $(STATIC_OBJS)
 	
 lib$(LIBNAME).so: $(SHARED_OBJDIR) $(SHARED_OBJS)
-	$(CC) -shared -Wl,-soname,lib$(LIBNAME).so.$(TARGET_MA) -o lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI) $(SHARED_OBJS)
+	$(CC) -shared -Wl,-soname,lib$(LIBNAME).so.$(VERSION_MA) -o lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI) $(SHARED_OBJS)
 
 install: $(PREFIX)
 	install -m 0755 lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI) $(PREFIX)/lib
-	ln -sf $(PREFIX)/lib/$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI) $(PREFIX)/lib/$(LIBNAME).so
-	ln -sf $(PREFIX)/lib/$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI) $(PREFIX)/lib/$(LIBNAME).so.$(VERSION_MA)
+	ln -sf $(PREFIX)/lib/lib$(LIBNAME).so.$(VERSION_MA) $(PREFIX)/lib/lib$(LIBNAME).so
+	ln -sf $(PREFIX)/lib/lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI) $(PREFIX)/lib/lib$(LIBNAME).so.$(VERSION_MA)
 	install -m 0644 vector.h $(PREFIX)/include
 	install -m 0644 lib$(LIBNAME).a $(PREFIX)/lib
 
