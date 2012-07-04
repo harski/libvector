@@ -9,10 +9,8 @@ int vector_add (struct vector *v, void *element)
     /* If list too small, expand */
     if(v->elements == v->size) {
         void * tmp = malloc(2 * v->size * sizeof(void *));
-        if (tmp == NULL) {
-            /* TODO: indicate error here */
+        if (tmp == NULL)
             return 0;
-        }
 
         v->size *= 2;
         memcpy(tmp, v->list, v->elements*sizeof(void *));
@@ -50,6 +48,7 @@ struct vector * vector_create_size (size_t size)
 
 void vector_destroy (struct vector * v)
 {
+    if (v->list != NULL) free(v->list);
     free(v);
 }
 
