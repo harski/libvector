@@ -4,19 +4,26 @@
 #include "vector.h"
 
 
+static int vector_resize (struct vector *v, size_t size)
+{
+    if (size > 0) {
+        void * tmp = malloc(size*sizeof(void *));
+        if (tmp==NULL) return 0;
+
+        memcpy(tmp, v->list, v->elements*sizeof(void*));
+        free(v->list);
+        v->list = tmp;
+    }
+
+    return size;
+}
+
+
 int vector_add (struct vector *v, void *element)
 {
     /* If list too small, expand */
     if(v->elements == v->size) {
-        void * tmp = malloc(2 * v->size * sizeof(void *));
-        if (tmp == NULL)
-            return 0;
-
-        v->size *= 2;
-        memcpy(tmp, v->list, v->elements*sizeof(void *));
-
-        free(v->list);
-        v->list = tmp;
+        if(!vector_resize(v, 2*v->size)) return 0;
     }
 
     v->list[v->elements] = element;
