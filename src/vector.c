@@ -53,7 +53,7 @@ void vector_destroy (struct vector * v)
 }
 
 
-void * vector_get (struct vector *v, unsigned int index)
+void * vector_get (const struct vector *v, unsigned int index)
 {
     if (v->elements <= index)
         return NULL;

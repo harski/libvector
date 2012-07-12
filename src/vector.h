@@ -17,7 +17,7 @@ int vector_add (struct vector *v, void *element);
 struct vector * vector_create ();
 struct vector * vector_create_size (size_t size);
 void vector_destroy (struct vector *v);
-void * vector_get (struct vector *v, unsigned int index);
+void * vector_get (const struct vector *v, unsigned int index);
 void * vector_remove (struct vector *v, unsigned int index);
 
 
