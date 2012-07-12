@@ -88,3 +88,13 @@ void * vector_remove (struct vector *v, unsigned int index)
     return tmp;
 }
 
+void vector_compact (struct vector *v)
+{
+    if (v->size > v->elements) {
+        if (v->elements==0)
+            vector_resize(v, 1);
+        else
+            vector_resize(v, v->elements);
+    }
+}
+
