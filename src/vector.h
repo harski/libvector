@@ -14,6 +14,7 @@ struct vector {
 
 
 int vector_add (struct vector *v, void *element);
+int vector_add_vector (struct vector *v1, struct vector *v2);
 struct vector * vector_create ();
 struct vector * vector_create_size (size_t size);
 void vector_destroy (struct vector *v);

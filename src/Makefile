@@ -22,7 +22,7 @@ AR = ar
 ARFLAGS = -cvq
 
 VERSION_MA = 0
-VERSION_MI = 3
+VERSION_MI = 4
 
 all: $(TARGET_A) $(TARGET_SO)
 

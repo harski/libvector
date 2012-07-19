@@ -33,6 +33,18 @@ int vector_add (struct vector *v, void *element)
 }
 
 
+int vector_add_vector (struct vector *v1, struct vector *v2)
+{
+    unsigned int i;
+    for (i=0; i<v2->elements; ++i) {
+        if (vector_add(v1, vector_get(v2, i)))
+            return 0;
+    }
+
+    return v1->elements;
+}
+
+
 struct vector * vector_create ()
 {
     return vector_create_size(VECTOR_DEFAULT_SIZE);
