@@ -1,0 +1,4 @@
+libcontainer.a
+libcontainer.so*
+shared/
+static/
