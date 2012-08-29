@@ -19,6 +19,9 @@ SHARED_OBJS = $(addprefix shared/,$(OBJS))
 STATIC_OBJDIR = static/
 SHARED_OBJDIR = shared/
 PREFIX = /usr/local
+INCLUDEDIR = $(PREFIX)/include
+LIBDIR = $(PREFIX)/lib
+
 INSTALL = install
 MKDIR = mkdir -p
 
@@ -33,12 +36,21 @@ $(TARGET_A): $(STATIC_OBJDIR) $(STATIC_OBJS)
 $(TARGET_SO): $(SHARED_OBJDIR) $(SHARED_OBJS)
 	$(CC) -shared -Wl,-soname,lib$(LIBNAME).so.$(VERSION_MA) -o $@ $(SHARED_OBJS)
 
-install: $(PREFIX)
-	install -m 0755 $(TARGET_SO) $(PREFIX)/lib
-	ln -sf $(PREFIX)/lib/lib$(LIBNAME).so.$(VERSION_MA) $(PREFIX)/lib/lib$(LIBNAME).so
-	ln -sf $(PREFIX)/lib/$(TARGET_SO) $(PREFIX)/lib/lib$(LIBNAME).so.$(VERSION_MA)
-	install -m 0644 vector.h $(PREFIX)/include
-	install -m 0644 lib$(LIBNAME).a $(PREFIX)/lib
+install: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
+	install -m 0755 $(TARGET_SO) $(LIBDIR)
+	ln -sf $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA) $(LBDIR)/lib$(LIBNAME).so
+	ln -sf $(LBIDIR)/$(TARGET_SO) $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA)
+	install -m 0644 vector.h $(INCLUDEDIR)
+	install -m 0644 $(TARGET_A) $(LIBDIR)
+
+$(PREFIX):
+	$(MKDIR) $(PREFIX)
+
+$(LIBDIR):
+	$(MKDIR) $(LIBDIR)
+
+$(INCLUDEDIR):
+	$(MKDIR) $(INCLUDEDIR)
 
 $(STATIC_OBJDIR)%.o: %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@
