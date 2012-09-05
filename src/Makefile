@@ -38,8 +38,8 @@ $(TARGET_SO): $(SHARED_OBJDIR) $(SHARED_OBJS)
 
 install: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install -m 0755 $(TARGET_SO) $(LIBDIR)
-	ln -sf $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA) $(LBDIR)/lib$(LIBNAME).so
-	ln -sf $(LBIDIR)/$(TARGET_SO) $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA)
+	ln -sf $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA) $(LIBDIR)/lib$(LIBNAME).so
+	ln -sf $(LIBDIR)/$(TARGET_SO) $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA)
 	install -m 0644 vector.h $(INCLUDEDIR)
 	install -m 0644 $(TARGET_A) $(LIBDIR)
 
