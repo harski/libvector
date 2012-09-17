@@ -1,3 +1,7 @@
+/* Copyright 2011-2012 Tuomo Hartikainen <hartitu@gmail.com>.
+ * Licensed under the 2-clause BSD license, see LICENSE. */
+
+
 #ifndef VECTOR_H
 #define VECTOR_H
 

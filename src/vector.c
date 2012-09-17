@@ -1,3 +1,7 @@
+/* Copyright 2011-2012 Tuomo Hartikainen <hartitu@gmail.com>.
+ * Licensed under the 2-clause BSD license, see LICENSE. */
+
+
 #include <stdlib.h>
 #include <string.h>
 
