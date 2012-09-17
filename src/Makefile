@@ -5,7 +5,7 @@ ifdef DEBUG
 CFLAGS += -DDEBUG
 endif
 
-LIBNAME = container
+LIBNAME = vector
 
 VERSION_MA = 0
 VERSION_MI = 4
@@ -14,6 +14,7 @@ TARGET_A = lib$(LIBNAME).a
 TARGET_SO = lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI)
 
 OBJS = vector.o
+HEADER = vector.h
 STATIC_OBJS = $(addprefix static/,$(OBJS))
 SHARED_OBJS = $(addprefix shared/,$(OBJS))
 STATIC_OBJDIR = static/
@@ -40,7 +41,7 @@ install: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install -m 0755 $(TARGET_SO) $(LIBDIR)
 	ln -sf $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA) $(LIBDIR)/lib$(LIBNAME).so
 	ln -sf $(LIBDIR)/$(TARGET_SO) $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA)
-	install -m 0644 vector.h $(INCLUDEDIR)
+	install -m 0644 $(HEADER) $(INCLUDEDIR)
 	install -m 0644 $(TARGET_A) $(LIBDIR)
 
 $(PREFIX):
@@ -66,10 +67,10 @@ $(SHARED_OBJDIR):
 
 uninstall:
 	rm -rf $(PREFIX)/lib/lib$(LIBNAME)*
-	rm -rf $(PREFIX)/include/vector.h
+	rm -rf $(PREFIX)/include/$(HEADER)
 
 clean:
 	rm -rf $(SHARED_OBJS) $(STATIC_OBJS)
 
-.PHONY: all clean install
+.PHONY: all clean install uninstall
 
