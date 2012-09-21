@@ -1,4 +1,4 @@
-libcontainer.a
-libcontainer.so*
+libvector.a
+libvector.so*
 shared/
 static/
