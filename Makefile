@@ -1,3 +1,5 @@
+# Copyright 2011-2012 Tuomo Hartikainen <hartitu@gmail.com>.
+# Licensed under the 2-clause BSD license, see LICENSE.
 
 CC = gcc
 CFLAGS = -g -std=gnu99 --pedantic -Wall
@@ -13,15 +15,21 @@ VERSION_MI = 4
 TARGET_A = lib$(LIBNAME).a
 TARGET_SO = lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI)
 
-OBJS = vector.o
 HEADER = vector.h
-STATIC_OBJS = $(addprefix static/,$(OBJS))
-SHARED_OBJS = $(addprefix shared/,$(OBJS))
-STATIC_OBJDIR = static/
-SHARED_OBJDIR = shared/
+SRCDIR = src
+STATIC_OBJDIR = static
+SHARED_OBJDIR = shared
 PREFIX = /usr/local
 INCLUDEDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
+
+SRC_FILES =$(wildcard $(SRCDIR)/*.c)
+
+STATIC_OBJS =$(subst $(SRCDIR),$(STATIC_OBJDIR),$(SRC_FILES))
+STATIC_OBJS :=$(subst .c,.o,$(STATIC_OBJS))
+
+SHARED_OBJS =$(subst $(SRCDIR),$(SHARED_OBJDIR),$(SRC_FILES))
+SHARED_OBJS :=$(subst .c,.o,$(SHARED_OBJS))
 
 INSTALL = install
 MKDIR = mkdir -p
@@ -33,7 +41,7 @@ all: $(TARGET_A) $(TARGET_SO)
 
 $(TARGET_A): $(STATIC_OBJDIR) $(STATIC_OBJS)
 	$(AR) $(ARFLAGS) $@ $(STATIC_OBJS)
-	
+
 $(TARGET_SO): $(SHARED_OBJDIR) $(SHARED_OBJS)
 	$(CC) -shared -Wl,-soname,lib$(LIBNAME).so.$(VERSION_MA) -o $@ $(SHARED_OBJS)
 
@@ -41,7 +49,7 @@ install: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install -m 0755 $(TARGET_SO) $(LIBDIR)
 	ln -sf $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA) $(LIBDIR)/lib$(LIBNAME).so
 	ln -sf $(LIBDIR)/$(TARGET_SO) $(LIBDIR)/lib$(LIBNAME).so.$(VERSION_MA)
-	install -m 0644 $(HEADER) $(INCLUDEDIR)
+	install -m 0644 $(SRCDIR)/$(HEADER) $(INCLUDEDIR)
 	install -m 0644 $(TARGET_A) $(LIBDIR)
 
 $(PREFIX):
@@ -53,10 +61,10 @@ $(LIBDIR):
 $(INCLUDEDIR):
 	$(MKDIR) $(INCLUDEDIR)
 
-$(STATIC_OBJDIR)%.o: %.c %.h
+$(STATIC_OBJDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(SHARED_OBJDIR)%.o: %.c %.h
+$(SHARED_OBJDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 $(STATIC_OBJDIR):
@@ -70,7 +78,7 @@ uninstall:
 	rm -rf $(PREFIX)/include/$(HEADER)
 
 clean:
-	rm -rf $(SHARED_OBJS) $(STATIC_OBJS)
+	rm -rf $(SHARED_OBJDIR) $(STATIC_OBJDIR)
 
 .PHONY: all clean install uninstall
 
