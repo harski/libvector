@@ -26,9 +26,9 @@ static int vector_resize (struct vector *v, size_t size)
 int vector_add (struct vector *v, void *element)
 {
     /* If list too small, expand */
-    if(v->elements == v->size) {
-        if(!vector_resize(v, 2*v->size)) return 0;
-    }
+    if(v->elements == v->size)
+        if(!vector_resize(v, 2*v->size))
+            return 0;
 
     v->list[v->elements] = element;
     v->elements += 1;
@@ -58,7 +58,9 @@ struct vector * vector_init ()
 struct vector * vector_init_size (size_t size)
 {
     struct vector *v = (struct vector *) malloc(sizeof(struct vector));
-    if (v==NULL) return NULL;
+
+    if (v==NULL)
+        return NULL;
 
     v->list = malloc(size*sizeof(void *));
 
@@ -83,7 +85,7 @@ struct vector * vector_create_size (size_t size)
 
 void vector_destroy (struct vector * v)
 {
-    if (v->list != NULL) free(v->list);
+    free(v->list);
     free(v);
 }
 
@@ -107,14 +109,14 @@ void * vector_remove (struct vector *v, unsigned int index)
     tmp = v->list[index];
 
     /* TODO: more efficent with memmove */
-    for (int i = index; i < v->elements-1; ++i) {
+    for (int i = index; i < v->elements-1; ++i)
         v->list[i] = v->list[i+1];
-    }
 
     v->elements -= 1;
 
     return tmp;
 }
+
 
 void vector_compact (struct vector *v)
 {
