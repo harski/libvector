@@ -71,21 +71,13 @@ struct vector * vector_init_size (size_t size)
 
 struct vector * vector_create ()
 {
-    return vector_create_size(VECTOR_DEFAULT_SIZE);
+    return vector_init_size(VECTOR_DEFAULT_SIZE);
 }
 
 
 struct vector * vector_create_size (size_t size)
 {
-    struct vector *v = (struct vector *) malloc(sizeof(struct vector));
-    if (v==NULL) return NULL;
-
-    v->list = malloc(size*sizeof(void *));
-
-    v->size = size;
-    v->elements = 0;
-
-    return v;
+    return vector_init_size(size);
 }
 
 
