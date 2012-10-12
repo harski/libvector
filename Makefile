@@ -10,7 +10,7 @@ endif
 LIBNAME = vector
 
 VERSION_MA = 0
-VERSION_MI = 4
+VERSION_MI = 5
 
 TARGET_A = lib$(LIBNAME).a
 TARGET_SO = lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI)
