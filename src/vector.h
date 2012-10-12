@@ -32,7 +32,7 @@ int vector_add (struct vector *v, void *element);
 
 /* Add the elements in v2 to v1. v2 is left intact.
  * Returs the number of elements in v1.*/
-int vector_add_vector (struct vector *v1, struct vector *v2);
+int vector_add_vector (struct vector *v1, const struct vector *v2);
 
 /* Initialize a vector with an initial capacity of VECTOR_DEFAULT_SIZE.
  * Returns the allocated, initialized vector, or if an error occured NULL. */

@@ -37,7 +37,7 @@ int vector_add (struct vector *v, void *element)
 }
 
 
-int vector_add_vector (struct vector *v1, struct vector *v2)
+int vector_add_vector (struct vector *v1, const struct vector *v2)
 {
     unsigned int i;
     for (i=0; i<v2->elements; ++i) {
