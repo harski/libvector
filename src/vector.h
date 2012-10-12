@@ -7,6 +7,15 @@
 
 #include <stddef.h>
 
+#ifdef __GNUC__
+#define DEPRECATED(func) func __attribute__ ((deprecated))
+#elif defined(_MSC_VER)
+#define DEPRECATED(func) __declspec(deprecated) func
+#else
+#pragma message("WARNING: You need to implement DEPRECATED for this compiler")
+#define DEPRECATED(func) func
+#endif
+
 #define VECTOR_DEFAULT_SIZE 8
 
 typedef struct vector Vector;
