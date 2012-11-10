@@ -2,9 +2,9 @@
 # Licensed under the 2-clause BSD license, see LICENSE.
 
 CC = gcc
-CFLAGS = -g -std=gnu99 --pedantic -Wall
+CFLAGS = -std=c90 --pedantic -Wall -Wextra
 ifdef DEBUG
-CFLAGS += -DDEBUG
+CFLAGS += -g -DDEBUG
 endif
 
 LIBNAME = vector
