@@ -102,6 +102,7 @@ void * vector_get (const struct vector *v, unsigned int index)
 void * vector_remove (struct vector *v, unsigned int index)
 {
     void *tmp;
+    unsigned int i;
 
     if (v->elements <= index)
         return NULL;
@@ -109,7 +110,7 @@ void * vector_remove (struct vector *v, unsigned int index)
     tmp = v->list[index];
 
     /* TODO: more efficent with memmove */
-    for (int i = index; i < v->elements-1; ++i)
+    for (i = index; i < v->elements-1; ++i)
         v->list[i] = v->list[i+1];
 
     v->elements -= 1;
