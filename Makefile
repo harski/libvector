@@ -1,16 +1,14 @@
 # Copyright 2011-2012 Tuomo Hartikainen <hartitu@gmail.com>.
 # Licensed under the 2-clause BSD license, see LICENSE.
 
-CC = gcc
-CFLAGS = -std=c90 --pedantic -Wall -Wextra
+
+include config.mk
+
 ifdef DEBUG
 CFLAGS += -g -DDEBUG
 endif
 
 LIBNAME = vector
-
-VERSION_MA = 0
-VERSION_MI = 5
 
 TARGET_A = lib$(LIBNAME).a
 TARGET_SO = lib$(LIBNAME).so.$(VERSION_MA).$(VERSION_MI)
@@ -19,7 +17,6 @@ HEADER = vector.h
 SRCDIR = src
 STATIC_OBJDIR = static
 SHARED_OBJDIR = shared
-PREFIX = /usr/local
 INCLUDEDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 
