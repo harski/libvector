@@ -76,6 +76,7 @@ uninstall:
 
 clean:
 	rm -rf $(SHARED_OBJDIR) $(STATIC_OBJDIR)
+	rm -rf $(TARGET_A) $(TARGET_SO)
 
 .PHONY: all clean install uninstall
 
