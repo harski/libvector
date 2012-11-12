@@ -11,3 +11,5 @@ VERSION_MI = 5
 
 PREFIX = /usr/local
 
+# DEBUG = 1
+
