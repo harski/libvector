@@ -6,9 +6,6 @@
 CC = cc
 CFLAGS = -std=c90 --pedantic -Wall -Wextra
 
-VERSION_MA = 0
-VERSION_MI = 5
-
 PREFIX = /usr/local
 
 # DEBUG = 1
