@@ -1,0 +1,34 @@
+Introduction
+============
+
+libvector is a data structure for easy storage and access of data. Get
+the latest source from https://github.com/harski/libvector.
+
+
+Compiling
+=========
+
+Edit the config.mk to suit your needs and system. Then:
+
+$ make
+
+
+Installing
+==========
+
+$ make install
+
+
+Uninstalling
+============
+
+$ make uninstall
+
+
+Legal stuff
+===========
+
+Copyright (c) 2011-2012, Tuomo Hartikainen <hartitu@gmail.com>. All
+rights reserved.  Licenced under 2-clause BSD license. See LICENCE for
+details.
+
