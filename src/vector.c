@@ -11,12 +11,15 @@
 static int vector_resize (struct vector *v, size_t size)
 {
     if (size > 0) {
-        void * tmp = malloc(size*sizeof(void *));
-        if (tmp==NULL) return 0;
+        void ** tmp = (void **) malloc(size*sizeof(void *));
+        if (tmp==NULL)
+            return 0;
 
         memcpy(tmp, v->list, v->elements*sizeof(void*));
+
         free(v->list);
         v->list = tmp;
+        v->size = size;
     }
 
     return size;
@@ -62,7 +65,7 @@ struct vector * vector_init_size (size_t size)
     if (v==NULL)
         return NULL;
 
-    v->list = malloc(size*sizeof(void *));
+    v->list = (void **) malloc(size*sizeof(void *));
 
     v->size = size;
     v->elements = 0;
