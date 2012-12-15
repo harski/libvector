@@ -60,11 +60,18 @@ void vector_destroy (struct vector *v);
  * Returns the element in the index if such exists, otherwise NULL. */
 void * vector_get (const struct vector *v, unsigned int index);
 
+/* Get the last element in the vector v, or NULL if v is empty. */
+void * vector_get_last (const struct vector *v);
+
 /* Remove element from index specified by the "index" parameter from the vector
  * v and return it to the caller.
  * Returns the element at the index "index", or NULL if no such element
  * exists. */
 void * vector_remove (struct vector *v, unsigned int index);
+
+/* Remove the last element of the vector v and return it. If v is empty NULL
+ * return NULL. */
+void * vector_remove_last (struct vector *v);
 
 /* Compacts the pointer array in vector v to be as small as possible. */
 void vector_compact (struct vector *v);

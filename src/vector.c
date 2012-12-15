@@ -99,6 +99,15 @@ void * vector_get (const struct vector *v, unsigned int index)
 }
 
 
+void * vector_get_last (const struct vector *v)
+{
+    if (v->elements==0)
+        return NULL;
+    else
+        return vector_get (v, v->elements - 1);
+}
+
+
 void * vector_remove (struct vector *v, unsigned int index)
 {
     void *tmp;
@@ -116,6 +125,15 @@ void * vector_remove (struct vector *v, unsigned int index)
     v->elements -= 1;
 
     return tmp;
+}
+
+
+void * vector_remove_last (struct vector *v)
+{
+    if (v->elements==0)
+        return NULL;
+    else
+        return vector_remove(v, v->elements - 1);
 }
 
 
