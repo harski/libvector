@@ -111,16 +111,13 @@ void * vector_get_last (const struct vector *v)
 void * vector_remove (struct vector *v, unsigned int index)
 {
     void *tmp;
-    unsigned int i;
 
     if (v->elements <= index)
         return NULL;
 
     tmp = v->list[index];
 
-    /* TODO: more efficent with memmove */
-    for (i = index; i < v->elements-1; ++i)
-        v->list[i] = v->list[i+1];
+    memmove(v->list+index, v->list+index+1, (v->elements-index-1)*sizeof(void *));
 
     v->elements -= 1;
 
